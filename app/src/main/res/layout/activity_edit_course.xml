@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateCourse">
+    tools:context=".EditCourse">
 
     <ImageView
         android:id="@+id/imageView"
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
-        android:text="CREATE COURSE"
+        android:text="EDIT COURSE"
         android:textColor="@color/white"
         android:textSize="25dp"
 
@@ -83,10 +83,10 @@
         app:layout_constraintWidth_percent="0.8" />
 
     <Button
-        android:id="@+id/addCourse"
+        android:id="@+id/searchCourse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Create Course"
+        android:text="Search For Course"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
