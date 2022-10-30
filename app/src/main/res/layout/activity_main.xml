@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
-        android:text="Student Course Booking App"
+        android:text="Student Course App"
         android:textColor="@color/white"
         android:textSize="20dp"
 
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
-        android:text="Don't have an account? Then"
+        android:text="Don't have an account?"
         android:textColor="@color/black"
         android:textSize="15dp"
         app:layout_constraintVertical_bias="0.25"
