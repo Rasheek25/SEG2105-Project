@@ -6,9 +6,15 @@ public class Instructor implements User {
     public final String ROLE = "Instructor";
     private int id;
 
+    public Instructor(){}
+
     public Instructor(String username, String password){
         this.username = username;
         this.password = password;
+    }
+
+    public Instructor(String username){
+        this.username = username;
     }
 
     @Override

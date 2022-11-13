@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".DeleteStudentAccount">
 
     <ImageView
         android:id="@+id/imageView"
@@ -15,20 +15,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".27"
+        app:layout_constraintHeight_percent="0.27"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
-        android:text="Student Course App"
+        android:text="DELETE STUDENT ACCOUNT"
         android:textColor="@color/white"
-        android:textSize="20dp"
-
+        android:textSize="25dp"
 
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -36,21 +35,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/noAccount"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/home"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="serif-monospace"
-        android:text="Don't have an account?"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        app:layout_constraintVertical_bias="0.25"
-
+        android:text="Home"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintWidth_percent="0.3" />
 
     <EditText
         android:id="@+id/userName"
@@ -68,47 +66,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="15dp"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintWidth_percent="0.8" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/searchAccount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Search Student Account"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461"
         app:layout_constraintWidth_percent="0.8" />
 
-    <Button
-        android:id="@+id/signUp"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/usernameText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="serif-monospace"
+        android:hint="Username"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/deleteAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchAccount"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/deleteAccount"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
+        android:text="DELETE ACCOUNT"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/noAccount"
-        app:layout_constraintWidth_percent="0.8" />
+        app:layout_constraintTop_toBottomOf="@+id/searchAccount"
+        app:layout_constraintVertical_bias="0.991"
+        app:layout_constraintWidth_percent="0.4" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

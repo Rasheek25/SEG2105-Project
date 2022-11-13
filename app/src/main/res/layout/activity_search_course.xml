@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SearchCourse">
 
     <ImageView
         android:id="@+id/imageView"
@@ -15,20 +15,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".27"
+        app:layout_constraintHeight_percent="0.27"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/searchCourseTopText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
-        android:text="Student Course App"
+        android:text="SEARCH COURSE"
         android:textColor="@color/white"
-        android:textSize="20dp"
-
+        android:textSize="25dp"
 
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -36,79 +35,74 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/noAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif-monospace"
-        android:text="Don't have an account?"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        app:layout_constraintVertical_bias="0.25"
 
+    <Button
+        android:id="@+id/logOut"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintWidth_percent="0.3" />
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/courseCode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintVertical_bias="0.35"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:hint = "Username"
+        android:hint="Course Code"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.316"
+        app:layout_constraintWidth_percent="0.8" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/courseName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="Course Name"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="15dp"
-        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/courseCode"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintWidth_percent="0.8" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/searchCourse"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Search For Course"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.472"
         app:layout_constraintWidth_percent="0.8" />
 
-    <Button
-        android:id="@+id/signUp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/noAccount"
-        app:layout_constraintWidth_percent="0.8" />
+    <ListView
+        android:id="@+id/productListView"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchCourse"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -70,22 +70,22 @@
     <Button
         android:id="@+id/createCourse"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="70dp"
         android:text="Create Course"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintVertical_bias="0.1"/>
+        app:layout_constraintVertical_bias="0.033"
+        app:layout_constraintWidth_percent="0.8" />
 
     <Button
         android:id="@+id/editCourse"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="70dp"
         android:text="Edit Course"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -94,13 +94,13 @@
         app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createCourse"
-        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_bias="0.036"
         app:layout_constraintWidth_percent="0.8" />
 
     <Button
         android:id="@+id/deleteCourse"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="70dp"
         android:text="Delete Course"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -109,7 +109,39 @@
         app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCourse"
-        app:layout_constraintVertical_bias="0.22"
+        app:layout_constraintVertical_bias="0.023"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Button
+        android:id="@+id/deleteStudentAccount"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:text="Delete Student Account"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteCourse"
+        app:layout_constraintVertical_bias="0.063"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Button
+        android:id="@+id/deleteInstructorAccount"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:text="Delete Instructor Account"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHorizontal_bias="0.836"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteCourse"
+        app:layout_constraintVertical_bias="0.063"
         app:layout_constraintWidth_percent="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

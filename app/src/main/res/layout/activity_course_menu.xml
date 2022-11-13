@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InstructorFunction">
+    tools:context=".Course">
 
     <ImageView
         android:id="@+id/imageView"
@@ -21,11 +21,11 @@
         app:layout_constraintVertical_bias="0" />
 
     <TextView
-        android:id="@+id/welcomeUser"
+        android:id="@+id/CourseCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
-        android:text="Welcome ‘firstname/username’!"
+        android:text="Course Code"
         android:textColor="@color/white"
         android:textSize="20dp"
 
@@ -37,11 +37,11 @@
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <TextView
-        android:id="@+id/userRole"
+        android:id="@+id/CourseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
-        android:text="You are logged in as instructor"
+        android:text="Course Name"
         android:textColor="@color/white"
         android:textSize="20dp"
 
@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/welcomeUser" />
+        app:layout_constraintTop_toTopOf="@+id/CourseCode" />
 
     <Button
         android:id="@+id/logOut"
@@ -67,19 +67,6 @@
         app:layout_constraintTop_toTopOf="@+id/imageView"
         app:layout_constraintWidth_percent="0.3" />
 
-    <Button
-        android:id="@+id/SearchCourse"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:text="Search Course"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.033"
-        app:layout_constraintWidth_percent="0.8" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

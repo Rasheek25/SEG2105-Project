@@ -19,12 +19,16 @@ import android.os.Bundle;
 public class StudentFunction extends AppCompatActivity {
 
     Button logoutBtn;
+    TextView welcomeTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_function);
 
         logoutBtn = findViewById(R.id.logOut);
+        welcomeTxt = findViewById(R.id.welcomeUser);
+        welcomeTxt.setText("Welcome " + MainActivity.currentUser.getUsername() + " !");
 
         // button listeners
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -34,5 +38,5 @@ public class StudentFunction extends AppCompatActivity {
             }
         });
     }
-    }
+}
 

@@ -96,7 +96,7 @@
         app:layout_constraintWidth_percent="0.8" />
 
     <Button
-        android:id="@+id/delete"
+        android:id="@+id/deleteCourse"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="DELETE COURSE"
@@ -119,7 +119,7 @@
         android:textSize="20dp"
 
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/delete"
+        app:layout_constraintBottom_toTopOf="@+id/deleteCoursexs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchCourse" />
@@ -134,7 +134,7 @@
         android:textSize="20dp"
         android:paddingTop="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/delete"
+        app:layout_constraintBottom_toTopOf="@+id/deleteCourse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchCode" />

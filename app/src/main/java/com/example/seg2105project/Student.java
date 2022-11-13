@@ -6,9 +6,14 @@ public class Student implements User {
     public final String ROLE = "Student";
     private int id;
 
+    public Student(){}
+
     public Student(String username, String password){
         this.username = username;
         this.password = password;
+    }
+    public Student(String username){
+        this.username = username;
     }
 
     @Override
