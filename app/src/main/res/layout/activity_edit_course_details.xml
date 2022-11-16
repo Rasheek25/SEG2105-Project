@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AssignDetails">
+    tools:context=".EditCourseDetails">
 
     <ImageView
         android:id="@+id/imageView"
@@ -25,21 +25,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
-        android:text="EDIT COURSE"
+        android:text="EDIT COURSE DETAILS"
         android:textColor="@color/white"
         android:textSize="25dp"
 
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.633" />
 
     <Button
-        android:id="@+id/home"
+        android:id="@+id/back"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Home"
+        android:text="Back"
         app:layout_constraintVertical_bias="0.1"
         app:layout_constraintHorizontal_bias="0.1"
         android:textSize="16sp"
@@ -148,7 +150,7 @@
         android:id="@+id/addDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Add description"
+        android:text="Edit description"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -178,7 +180,7 @@
         android:id="@+id/addCapacity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Add Student Capacity"
+        android:text="Edit Student Capacity"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
