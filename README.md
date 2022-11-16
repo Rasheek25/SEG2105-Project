@@ -1,17 +1,16 @@
 # SEG2105-Project
-## Deliverable 1
+## Deliverable 2
 ### Student Course Booking App
 
-This application is written in Java and built using Android Studio
+This application is written in Java and built using Android Studio.
 
-In this deliverable, we implemented the user account management component and the admin
-functionality.
+In this deliverable, we implemented the instructor functionality.
 
-The admin functionality includes creating, editing, and deleting courses. The admins are able to create
-a course by entering both a course code and a course name. The admin can also edit both the course code
-and course name of existing courses. These courses can later be seen by instructors and students in later
-deliverables. If desired, the admin is able to delete a course entirely. The admin is able to delete both instructor and student user accounts.
+The instructor user functionality includes viewing all courses and searching for specific ones. The
+instructor is able to search using the course code and course name.
 
-To simplify the process, there is a single pre-created admin account. One can use the username
-admin and the password admin123. You should be able to create as many instructor and student accounts
-as desired.
+If a course has no assigned instructor, the user may assign themselves to be the instructor of that course.
+If the course already has an instructor, the user is unable to assign themselves as instructor. For courses
+that they are instructing, the user can add and edit the course days, course hours, course description, and
+course student capacity. The instructor user can also un-assign themselves from a course. This removes the instructor while also
+removing any specified course days, hours, description, and student capacity.
