@@ -51,4 +51,15 @@ public class Instructor implements User {
     public String getRole() {
         return ROLE;
     }
+
+    public void editCourseDescription(Course course, String description){
+        course.setCourseDescription(description);
+    }
+    public void editCourseSchedule(Course course, String schedule){
+        course.setCourseSchedule(schedule);
+    }
+    public void editCourseCapacity(Course course, Integer capacity){
+        course.setStudentCapacity(capacity);
+    }
+
 }

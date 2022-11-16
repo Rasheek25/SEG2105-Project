@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class InstructorFunction extends AppCompatActivity {
 
     Button logoutBtn;
+    Button searchCourseBtn;
     TextView welcomeTxt;
 
     @Override
@@ -19,14 +20,23 @@ public class InstructorFunction extends AppCompatActivity {
         setContentView(R.layout.activity_instructor_function);
 
         logoutBtn = findViewById(R.id.logOut);
+        searchCourseBtn = findViewById(R.id.SearchCourse);
         welcomeTxt = findViewById(R.id.welcomeUser);
         welcomeTxt.setText("Welcome " + MainActivity.currentUser.getUsername() + " !");
+
 
         // button listeners
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(InstructorFunction.this, MainActivity.class));
+            }
+        });
+
+        searchCourseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(InstructorFunction.this, SearchCourse.class));
             }
         });
     }
