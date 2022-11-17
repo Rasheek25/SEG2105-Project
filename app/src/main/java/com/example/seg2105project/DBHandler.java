@@ -104,10 +104,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
         values.put(COLUMN_COURSE_CODE, course.getCourseCode());
         values.put(COLUMN_COURSE_NAME, course.getCourseName());
-        values.put(COLUMN_COURSE_INSTRUCTOR, course.getInstructorName());
-        values.put(COLUMN_COURSE_CAPACITY, course.getStudentCapacity());
-        values.put(COLUMN_COURSE_DESCRIPTION, course.getCourseDescription());
-        values.put(COLUMN_COURSE_SCHEDULE, course.getCourseSchedule());
+        values.put(COLUMN_COURSE_INSTRUCTOR, "N/A");
+        values.put(COLUMN_COURSE_CAPACITY, 0);
+        values.put(COLUMN_COURSE_DESCRIPTION, "N/A");
+        values.put(COLUMN_COURSE_SCHEDULE, "N/A");
 
         db.insert(COURSES_TABLE_NAME, null, values);
         db.close();

@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
         android:text="Course Code"
+        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="20dp"
 
@@ -61,6 +62,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="serif-monospace"
         android:text="Course Name"
+        android:gravity="center"
         android:textColor="@color/white"
         android:textSize="20dp"
 
