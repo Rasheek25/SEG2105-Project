@@ -29,7 +29,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "studentAppDB.sqlite";
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 13;
 
 
 

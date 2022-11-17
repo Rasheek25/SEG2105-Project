@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ public class SearchCourse extends AppCompatActivity {
     EditText courseCodeET, courseNameET;
     Button searchCourseBtn, menuBtn;
     ListView courseListView;
+    static Course selectedCourse;
 
     ArrayList<String> courseList;
     ArrayAdapter adapter;
@@ -48,7 +50,7 @@ public class SearchCourse extends AppCompatActivity {
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SearchCourse.this, MainActivity.class));
+                startActivity(new Intent(SearchCourse.this, InstructorFunction.class));
             }
         });
 
@@ -78,6 +80,17 @@ public class SearchCourse extends AppCompatActivity {
 
             }
 
+        });
+
+        courseListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l){
+                String selectedCourseStr = adapter.getItem(i).toString();
+                String[] arr = selectedCourseStr.split(" : ");
+                selectedCourse = new Course(arr[0], arr[1]);
+                startActivity(new Intent(SearchCourse.this, CourseMenu.class));
+
+            }
         });
 
 
@@ -165,6 +178,7 @@ public class SearchCourse extends AppCompatActivity {
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courseList);
         courseListView.setAdapter(adapter);
+
 
     }
 

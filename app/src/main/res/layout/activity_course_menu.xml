@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Course">
+    tools:context=".CourseMenu">
 
     <ImageView
         android:id="@+id/imageView"
@@ -16,14 +16,16 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.27"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0" />
+        app:layout_constraintVertical_bias="0.001" />
+
     <Button
-        android:id="@+id/home"
+        android:id="@+id/back"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Home"
+        android:text="Back"
         app:layout_constraintVertical_bias="0.1"
         app:layout_constraintHorizontal_bias="0.1"
         android:textSize="16sp"
@@ -33,6 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
         app:layout_constraintWidth_percent="0.3" />
+
 
     <TextView
         android:id="@+id/CourseCode"
@@ -50,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.377" />
+        app:layout_constraintVertical_bias="0.494" />
 
     <TextView
         android:id="@+id/CourseName"
@@ -65,10 +68,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/CourseCode" />
-
-
+        app:layout_constraintTop_toTopOf="@+id/CourseCode"
+        app:layout_constraintVertical_bias="0.669" />
 
     <TextView
         android:id="@+id/instructor"
@@ -99,10 +102,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintHorizontal_bias="0.05"/>
+        app:layout_constraintVertical_bias="0.051" />
 
     <TextView
         android:id="@+id/dayTitle"
@@ -165,10 +168,17 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
         app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/capacity"
         app:layout_constraintVertical_bias="0.05" />
+=======
+        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/capacity"
+        app:layout_constraintVertical_bias="0.049" />
+>>>>>>> e018eda1a7a204e98393da722602a995e0a46aeb
 
     <TextView
         android:id="@+id/capacityTitle"
@@ -203,6 +213,7 @@
         app:layout_constraintTop_toBottomOf="@+id/day"
         app:layout_constraintVertical_bias="0.05" />
 
+
     <Button
         android:id="@+id/assign"
         android:layout_width="0dp"
@@ -217,12 +228,19 @@
         app:layout_constraintVertical_bias="0.95"
         app:layout_constraintWidth_percent="0.8" />
 
-
-
-
-
-
-
+    <Button
+        android:id="@+id/edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Edit Course"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/assign"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95"
+        app:layout_constraintWidth_percent="0.8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

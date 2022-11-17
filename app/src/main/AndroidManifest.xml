@@ -41,6 +41,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".EditCourseDetails"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".DeleteCourse"
             android:exported="false">
             <meta-data
@@ -84,6 +91,13 @@
         </activity>
         <activity
             android:name=".SignUp"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CourseMenu"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
