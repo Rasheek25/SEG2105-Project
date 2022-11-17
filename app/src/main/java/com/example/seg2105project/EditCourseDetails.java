@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.lang.StringBuffer;
 
 
 import android.os.Bundle;
@@ -20,11 +21,14 @@ public class EditCourseDetails extends AppCompatActivity {
 
     Button backBtn, addDayBtn, resetScheduleBtn, editDescriptionBtn, editCapacityBtn;
     EditText dayET, startTimeET, endTimeET, descriptionET, capacityET;
+    Course selectedCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_course_details);
+        selectedCourse = SearchCourse.selectedCourse;
+        getSupportActionBar().hide();
 
         //buttons
         backBtn = (Button) findViewById(R.id.back);
@@ -50,9 +54,99 @@ public class EditCourseDetails extends AppCompatActivity {
             }
         });
 
+        addDayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!dayET.getText().toString().equals("") &&
+                        !startTimeET.getText().toString().equals("") &&
+                        !endTimeET.getText().toString().equals("")) {
+
+                    selectedCourse.setCourseSchedule(dateToString(dayET, startTimeET, endTimeET));
+                    dayET.setText("");
+                    startTimeET.setText("");
+                    endTimeET.setText("");
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),
+                            "Invalid input",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        resetScheduleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedCourse.setCourseSchedule("N/A");
+                Toast.makeText(getApplicationContext(),
+                        "Schedule reset",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+        editDescriptionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedCourse.setCourseDescription(descriptionET.getText().toString());
+                Toast.makeText(getApplicationContext(),
+                        "Description edited successfully",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+        editCapacityBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    selectedCourse.setStudentCapacity(Integer.parseInt(capacityET.getText().toString()));
+                    Toast.makeText(getApplicationContext(),
+                            "Capacity edited successfully",
+                            Toast.LENGTH_LONG).show();
+                }
+                catch (Exception e){
+                    Toast.makeText(getApplicationContext(),
+                            "Invalid input",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
 
 
 
     }
+
+    //date and hours --> "day{startTime - endTime};" format
+    /*private String dateToString(EditText day, EditText startTime, EditText endTime){
+        String previous = selectedCourse.getCourseSchedule();
+        if (previous.equals("N/A")){
+            previous = "";
+        }
+        StringBuffer buffer = new StringBuffer(previous);
+        buffer.append(day.getText().toString());
+        buffer.append("{");
+        buffer.append(startTime.getText().toString());
+        buffer.append("-");
+        buffer.append(endTime.getText().toString());
+        buffer.append("}");
+        buffer.append(";");
+        return buffer.toString();
+    }*/
+
+    //date and hours --> "day : startTime - endTime | " format
+    private String dateToString(EditText day, EditText startTime, EditText endTime){
+        String previous = selectedCourse.getCourseSchedule();
+        if (previous.equals("N/A")){
+            previous = "";
+        }
+        StringBuffer buffer = new StringBuffer(previous);
+        buffer.append(day.getText().toString());
+        buffer.append(" : ");
+        buffer.append(startTime.getText().toString());
+        buffer.append(" - ");
+        buffer.append(endTime.getText().toString());
+        buffer.append(" | ");
+        return buffer.toString();
+    }
+
 }

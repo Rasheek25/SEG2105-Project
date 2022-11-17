@@ -54,11 +54,11 @@ public class Course {
     public void unassign(){
         this.instructor = null;
         myDBHandler.editCourseInstructor(this, "N/A");
-        this.courseDescription = null;
+        this.courseDescription = "N/A";
         myDBHandler.editCourseDescription(this, "N/A");
         this.studentCapacity = 0;
         myDBHandler.editCourseCapacity(this, 0);
-        this.courseSchedule = null;
+        this.courseSchedule = "N/A";
         myDBHandler.editCourseSchedule(this, "N/A");
 
     }
@@ -68,16 +68,11 @@ public class Course {
     }
 
     public String getInstructorName(){
-        if (this.instructor == null){
-            return "N/A";
-        }
-        else {
-            return this.instructor.getUsername();
-        }
+       return myDBHandler.getCourseInstructor(this);
     }
 
     public Integer getStudentCapacity() {
-        return this.studentCapacity;
+        return myDBHandler.getCourseCapacity(this);
     }
 
     public void setStudentCapacity(Integer studentCapacity) {
@@ -91,11 +86,11 @@ public class Course {
     }
 
     public String getCourseDescription() {
-        return this.courseDescription;
+        return myDBHandler.getCourseDescription(this);
     }
 
     public String getCourseSchedule() {
-        return courseSchedule;
+        return myDBHandler.getCourseSchedule(this);
     }
 
     public void setCourseSchedule(String courseSchedule) {

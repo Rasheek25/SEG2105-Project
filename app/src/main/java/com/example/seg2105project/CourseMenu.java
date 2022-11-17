@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.lang.StringBuffer;
 
 
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class CourseMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_menu);
+        getSupportActionBar().hide();
 
         selectedCourse = SearchCourse.selectedCourse;
         backBtn = (Button) findViewById(R.id.back);
@@ -55,7 +57,7 @@ public class CourseMenu extends AppCompatActivity {
                 if(selectedCourse.getInstructor() == null) {
                     selectedCourse.assign((Instructor) MainActivity.currentUser);
                     Toast.makeText(getApplicationContext(),
-                            "Assigned to course Successfully",
+                            "Assigned to course successfully",
                             Toast.LENGTH_LONG).show();
                     update();
                     UserRightsCheck();
@@ -63,7 +65,7 @@ public class CourseMenu extends AppCompatActivity {
                 else if (selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())){
                     selectedCourse.unassign();
                     Toast.makeText(getApplicationContext(),
-                            "Un-Assigned to course Successfully",
+                            "Un-assigned to course successfully",
                             Toast.LENGTH_LONG).show();
                     update();
                     UserRightsCheck();
@@ -85,7 +87,7 @@ public class CourseMenu extends AppCompatActivity {
     private void UserRightsCheck(){
 
         //course has no instructor
-        if(selectedCourse.getInstructor() == null){
+        if(selectedCourse.getInstructorName().equals("N/A")){
             assignBtn.setText("assign to Course");
             assignBtn.setVisibility(View.VISIBLE);
             editCourseBtn.setVisibility(View.GONE);
@@ -100,7 +102,7 @@ public class CourseMenu extends AppCompatActivity {
         }
 
         //course has other instructor
-        else{
+        else if (!selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())){
             editCourseBtn.setVisibility(View.GONE);
             assignBtn.setVisibility(View.GONE);
 
@@ -108,17 +110,40 @@ public class CourseMenu extends AppCompatActivity {
     }
 
     private void update(){
+       /* if(selectedCourse.getCourseDescription() == null) {
+            courseDescriptionText.setText("N/A");
+            selectedCourse.setCourseDescription("N/A");
+        }
+        else{*/
+            courseDescriptionText.setText(selectedCourse.getCourseDescription());
+        //}
         courseCodeText.setText(selectedCourse.getCourseCode());
         courseNameText.setText(selectedCourse.getCourseName());
         courseInstructorText.setText(selectedCourse.getInstructorName());
-        courseScheduleText.setText(selectedCourse.getCourseSchedule());
-        courseDescriptionText.setText(selectedCourse.getCourseDescription());
+        courseScheduleText.setText(toDisplayableString(selectedCourse.getCourseSchedule()));
+
         if(selectedCourse.getStudentCapacity() == 0){
             courseCapacityText.setText("N/A");
         }
         else{
             courseCapacityText.setText(selectedCourse.getStudentCapacity().toString());
         }
+    }
+
+    private String toDisplayableString(String str){
+        /*if(str == null){
+            return "N/A";
+        }*/
+        if(str.equals("N/A")){
+            return "N/A";
+        }
+        else {
+            StringBuffer buffer = new StringBuffer(str);
+            //removing last ";"
+            buffer.deleteCharAt(buffer.length() - 2);
+            return buffer.toString();
+        }
+
     }
 
 

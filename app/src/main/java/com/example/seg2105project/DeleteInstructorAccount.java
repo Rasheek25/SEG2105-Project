@@ -24,6 +24,7 @@ public class DeleteInstructorAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_instructor_account);
+        getSupportActionBar().hide();
 
         homeBtn = findViewById(R.id.home);
         searchAccountBtn = findViewById(R.id.searchAccount);

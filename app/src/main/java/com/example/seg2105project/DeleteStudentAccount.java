@@ -27,6 +27,7 @@ public class DeleteStudentAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_student_account);
+        getSupportActionBar().hide();
 
         homeBtn = findViewById(R.id.home);
         searchAccountBtn = findViewById(R.id.searchAccount);

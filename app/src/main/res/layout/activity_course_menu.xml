@@ -156,6 +156,7 @@
         app:layout_constraintTop_toBottomOf="@+id/descriptonTitle"
         app:layout_constraintVertical_bias="0.05" />
 
+
     <TextView
         android:id="@+id/descriptonTitle"
         android:layout_width="wrap_content"
@@ -169,11 +170,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.039"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/capacity"
-        app:layout_constraintVertical_bias="0.05" />
-    
+        app:layout_constraintVertical_bias="0.055" />
 
     <TextView
         android:id="@+id/capacityTitle"

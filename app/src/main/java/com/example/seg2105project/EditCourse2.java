@@ -23,6 +23,7 @@ public class EditCourse2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_course2);
+        getSupportActionBar().hide();
 
         homeBtn = findViewById(R.id.home);
         editCourseBtn = findViewById(R.id.edit);

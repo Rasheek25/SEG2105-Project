@@ -25,6 +25,7 @@ public class StudentFunction extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_function);
+        getSupportActionBar().hide();
 
         logoutBtn = findViewById(R.id.logOut);
         welcomeTxt = findViewById(R.id.welcomeUser);

@@ -321,6 +321,62 @@ public class DBHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public String getCourseInstructor(Course course) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME +  " WHERE " + COLUMN_COURSE_CODE + "=\"" + course.getCourseCode() + "\"" + " AND " + COLUMN_COURSE_NAME + "=\"" + course.getCourseName() + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        String r = null;
+
+        if (cursor.moveToFirst()) {
+            r = cursor.getString(3);
+            cursor.close();
+        }
+        db.close();
+        return r;
+    }
+
+    public String getCourseDescription(Course course) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME +  " WHERE " + COLUMN_COURSE_CODE + "=\"" + course.getCourseCode() + "\"" + " AND " + COLUMN_COURSE_NAME + "=\"" + course.getCourseName() + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        String r = null;
+
+        if (cursor.moveToFirst()) {
+            r = cursor.getString(5);
+            cursor.close();
+        }
+        db.close();
+        return r;
+    }
+
+    public String getCourseSchedule(Course course) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME +  " WHERE " + COLUMN_COURSE_CODE + "=\"" + course.getCourseCode() + "\"" + " AND " + COLUMN_COURSE_NAME + "=\"" + course.getCourseName() + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        String r = null;
+
+        if (cursor.moveToFirst()) {
+            r = cursor.getString(6);
+            cursor.close();
+        }
+        db.close();
+        return r;
+    }
+
+    public Integer getCourseCapacity(Course course) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME +  " WHERE " + COLUMN_COURSE_CODE + "=\"" + course.getCourseCode() + "\"" + " AND " + COLUMN_COURSE_NAME + "=\"" + course.getCourseName() + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        Integer r = null;
+
+        if (cursor.moveToFirst()) {
+            r = Integer.parseInt(cursor.getString(4));
+            cursor.close();
+        }
+        db.close();
+        return r;
+    }
+
     public Course findByCourseCode(String CourseCode) {
         SQLiteDatabase db = this.getWritableDatabase();
 

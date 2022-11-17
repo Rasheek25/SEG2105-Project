@@ -18,6 +18,7 @@ public class InstructorFunction extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor_function);
+        getSupportActionBar().hide();
 
         logoutBtn = findViewById(R.id.logOut);
         searchCourseBtn = findViewById(R.id.SearchCourse);

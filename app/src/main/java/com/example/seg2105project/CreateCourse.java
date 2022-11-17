@@ -22,6 +22,8 @@ public class CreateCourse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_course);
+        getSupportActionBar().hide();
+
 
         DBHandler myDBHandler = new DBHandler(this);
         homeBtn = findViewById(R.id.home);

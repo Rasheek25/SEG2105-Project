@@ -24,6 +24,7 @@ public class DeleteCourse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_course);
+        getSupportActionBar().hide();
 
         homeBtn = findViewById(R.id.home);
         searchCourseBtn = findViewById(R.id.searchCourse);

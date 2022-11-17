@@ -18,6 +18,7 @@ public class AdminFunction extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_function);
+        getSupportActionBar().hide();
 
 
 
