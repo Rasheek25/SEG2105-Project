@@ -15,5 +15,7 @@ public interface User {
     void setPassword(String password);
 
     String getRole();
+
+    String toString();
 }
 

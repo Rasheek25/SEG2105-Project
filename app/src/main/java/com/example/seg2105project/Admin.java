@@ -67,4 +67,10 @@ public class Admin implements User{
         return myDBHandler.editCourse(oldCourse, newCourse);
     }
 
+    public String toString(){
+        return this.username;
+    }
+
+
+
 }

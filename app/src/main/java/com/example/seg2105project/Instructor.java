@@ -62,4 +62,9 @@ public class Instructor implements User {
         course.setStudentCapacity(capacity);
     }
 
+    public String toString(){
+        return this.username;
+    }
+
+
 }

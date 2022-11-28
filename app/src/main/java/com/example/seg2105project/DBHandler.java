@@ -16,6 +16,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
     private static final String COLUMN_ROLE = "role";
+    private static final String COLUMN_COURSES = "Courses";
 
     //courses table
     private static final String COURSES_TABLE_NAME = "courses";
@@ -26,10 +27,12 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_COURSE_CAPACITY = "capacity";
     private static final String COLUMN_COURSE_DESCRIPTION = "description";
     private static final String COLUMN_COURSE_SCHEDULE= "schedule";
+    private static final String COLUMN_ENROLLED_STUDENTS= "students";
+    private static final String COLUMN_STUDENT_COUNT= "student_count";
 
 
     private static final String DATABASE_NAME = "studentAppDB.sqlite";
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 15;
 
 
 
@@ -44,7 +47,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 "(" + COLUMN_ID + " INTEGER PRIMARY KEY, " +
                 COLUMN_USERNAME + " TEXT, " +
                 COLUMN_PASSWORD + " TEXT, " +
-                COLUMN_ROLE + " TEXT " + ")";
+                COLUMN_ROLE + " TEXT, " +
+                COLUMN_COURSES + " TEXT " + ")";
 
         String create_courses_table_cmd = "CREATE TABLE " + COURSES_TABLE_NAME +
                 "(" + COURSE_COLUMN_ID + " INTEGER PRIMARY KEY, " +
@@ -53,16 +57,15 @@ public class DBHandler extends SQLiteOpenHelper {
                 COLUMN_COURSE_INSTRUCTOR + " TEXT, " +
                 COLUMN_COURSE_CAPACITY + " INTEGER, " +
                 COLUMN_COURSE_DESCRIPTION + " TEXT, " +
-                COLUMN_COURSE_SCHEDULE + " TEXT " + ")";
+                COLUMN_COURSE_SCHEDULE + " TEXT, " +
+                COLUMN_ENROLLED_STUDENTS + " TEXT, " +
+                COLUMN_STUDENT_COUNT + " INTEGER " + ")";
 
         db.execSQL(create_users_table_cmd);
         db.execSQL(create_courses_table_cmd);
 
     }
-    public void tool(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_NAME, COLUMN_ID + "=" + "1", null);
-    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -92,6 +95,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_USERNAME, user.getUsername());
         values.put(COLUMN_PASSWORD, user.getPassword());
         values.put(COLUMN_ROLE, user.getRole());
+        values.put(COLUMN_COURSES, "N/A");
 
         db.insert(TABLE_NAME, null, values);
         db.close();
@@ -108,6 +112,8 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_COURSE_CAPACITY, 0);
         values.put(COLUMN_COURSE_DESCRIPTION, "N/A");
         values.put(COLUMN_COURSE_SCHEDULE, "N/A");
+        values.put(COLUMN_ENROLLED_STUDENTS, "N/A");
+        values.put(COLUMN_STUDENT_COUNT, 0);
 
         db.insert(COURSES_TABLE_NAME, null, values);
         db.close();
@@ -126,6 +132,21 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
         return found;
     }
+
+    public boolean courseFound(Course course){
+        boolean found = false;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + "=\"" + course.getCourseCode() + "\"" +" AND " + COLUMN_COURSE_NAME + "=\"" + course.getCourseName()+"\"";
+        Cursor cursor = db.rawQuery(query, null );
+
+        if(cursor.moveToFirst()){
+            found = true;
+        }
+        db.close();
+        return found;
+    }
+
     public String getUserRole(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME +  " WHERE " + COLUMN_USERNAME + "=\"" + username + "\"";
@@ -304,6 +325,23 @@ public class DBHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public boolean editEnrolledStudents(Course course, String students){
+        boolean result = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + "=\"" + course.getCourseCode() + "\"" +" AND " + COLUMN_COURSE_NAME + "=\"" + course.getCourseName()+"\"";
+        Cursor cursor = db.rawQuery(query, null );
+        if(cursor.moveToFirst()){
+            String idStr = cursor.getString(0);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_ENROLLED_STUDENTS, students);
+            db.update(COURSES_TABLE_NAME, contentValues,COURSE_COLUMN_ID + "=" + idStr, null);
+            cursor.close();
+            result = true;
+        }
+        return result;
+    }
+
     public boolean editCourseSchedule(Course course, String schedule){
         boolean result = false;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -315,6 +353,57 @@ public class DBHandler extends SQLiteOpenHelper {
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_COURSE_SCHEDULE, schedule);
             db.update(COURSES_TABLE_NAME, contentValues,COURSE_COLUMN_ID + "=" + idStr, null);
+            cursor.close();
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean editStudentCourses(User user, String courses){
+        boolean result = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_USERNAME + "=\"" + user.getUsername() + "\"" +" AND " + COLUMN_PASSWORD + "=\"" + user.getPassword()+"\"";
+        Cursor cursor = db.rawQuery(query, null );
+        if(cursor.moveToFirst()){
+            String idStr = cursor.getString(0);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_COURSES, courses);
+            db.update(TABLE_NAME, contentValues,COURSE_COLUMN_ID + "=" + idStr, null);
+            cursor.close();
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean editCourseCount(Course course, Integer newCount){
+        boolean result = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME + " WHERE " + COLUMN_COURSE_CODE + "=\"" + course.getCourseCode() + "\"" +" AND " + COLUMN_COURSE_NAME + "=\"" + course.getCourseName()+"\"";
+        Cursor cursor = db.rawQuery(query, null );
+        if(cursor.moveToFirst()){
+            String idStr = cursor.getString(0);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_STUDENT_COUNT, newCount);
+            db.update(COURSES_TABLE_NAME, contentValues,COURSE_COLUMN_ID + "=" + idStr, null);
+            cursor.close();
+            result = true;
+        }
+        return result;
+    }
+
+    public boolean editUserCourses(User user, String courses){
+        boolean result = false;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_USERNAME + "=\"" + user.getUsername() + "\"" +" AND " + COLUMN_PASSWORD + "=\"" + user.getPassword()+"\"";
+        Cursor cursor = db.rawQuery(query, null );
+        if(cursor.moveToFirst()){
+            String idStr = cursor.getString(0);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(COLUMN_COURSES, courses);
+            db.update(TABLE_NAME, contentValues,COLUMN_ID + "=" + idStr, null);
             cursor.close();
             result = true;
         }
@@ -377,6 +466,20 @@ public class DBHandler extends SQLiteOpenHelper {
         return r;
     }
 
+    public String getStudentCourses(User student) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_USERNAME + "=\"" + student.getUsername() + "\"" +" AND " + COLUMN_PASSWORD + "=\"" + student.getPassword()+"\"";
+        Cursor cursor = db.rawQuery(query, null);
+        String r = null;
+
+        if (cursor.moveToFirst()) {
+            r = cursor.getString(4);
+            cursor.close();
+        }
+        db.close();
+        return r;
+    }
+
     public Course findByCourseCode(String CourseCode) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -422,8 +525,33 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    public String getEnrolledStudents(Course course) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME +  " WHERE " + COLUMN_COURSE_CODE + "=\"" + course.getCourseCode() + "\"" + " AND " + COLUMN_COURSE_NAME + "=\"" + course.getCourseName() + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        String r = null;
 
+        if (cursor.moveToFirst()) {
+            r = cursor.getString(7);
+            cursor.close();
+        }
+        db.close();
+        return r;
+    }
 
+    public Integer getStudentCount(Course course) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + COURSES_TABLE_NAME +  " WHERE " + COLUMN_COURSE_CODE + "=\"" + course.getCourseCode() + "\"" + " AND " + COLUMN_COURSE_NAME + "=\"" + course.getCourseName() + "\"";
+        Cursor cursor = db.rawQuery(query, null);
+        Integer r = null;
+
+        if (cursor.moveToFirst()) {
+            r = Integer.parseInt(cursor.getString(8));
+            cursor.close();
+        }
+        db.close();
+        return r;
+    }
 }
 
 

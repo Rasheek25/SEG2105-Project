@@ -53,7 +53,7 @@ public class CourseMenu extends AppCompatActivity {
         assignBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //assign case
+                //User is Instructor
                 if(selectedCourse.getInstructor() == null) {
                     selectedCourse.assign((Instructor) MainActivity.currentUser);
                     Toast.makeText(getApplicationContext(),
@@ -61,6 +61,31 @@ public class CourseMenu extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     update();
                     UserRightsCheck();
+                }
+                //user is student
+                else if (MainActivity.currentUser instanceof Instructor){
+                    Student currentStudent = (Student)MainActivity.currentUser;
+                    //student is enrolled
+                    if( currentStudent.isEnrolled(selectedCourse)) {
+                        currentStudent.drop(selectedCourse);
+                        Toast.makeText(getApplicationContext(),
+                                "Droped course successfully",
+                                Toast.LENGTH_LONG).show();
+                        update();
+                        UserRightsCheck();
+                    }
+
+                    //student is enrolled
+                    else if ( !currentStudent.isEnrolled(selectedCourse)) {
+                        currentStudent.enroll(selectedCourse);
+                        Toast.makeText(getApplicationContext(),
+                                "Enrolled to course successfully",
+                                Toast.LENGTH_LONG).show();
+                        update();
+                        UserRightsCheck();
+                    }
+
+
                 }
                 else if (selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())){
                     selectedCourse.unassign();
@@ -71,6 +96,8 @@ public class CourseMenu extends AppCompatActivity {
                     UserRightsCheck();
 
                 }
+
+
             }
         });
 
@@ -101,12 +128,33 @@ public class CourseMenu extends AppCompatActivity {
 
         }
 
+        //user is student
+        else if (MainActivity.currentUser instanceof Instructor){
+            Student currentStudent = (Student)MainActivity.currentUser;
+            //student is enrolled
+            if( currentStudent.isEnrolled(selectedCourse)) {
+                editCourseBtn.setVisibility(View.GONE);
+                assignBtn.setText("enroll");
+            }
+
+            //student is enrolled
+            else if ( !currentStudent.isEnrolled(selectedCourse)) {
+                editCourseBtn.setVisibility(View.GONE);
+                assignBtn.setText("Drop Course");
+            }
+
+        }
+
         //course has other instructor
         else if (!selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())){
             editCourseBtn.setVisibility(View.GONE);
             assignBtn.setVisibility(View.GONE);
 
         }
+
+
+
+
     }
 
     private void update(){

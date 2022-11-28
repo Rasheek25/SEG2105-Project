@@ -18,7 +18,7 @@ import android.os.Bundle;
 
 public class StudentFunction extends AppCompatActivity {
 
-    Button logoutBtn;
+    Button logoutBtn, searchCourseBtn, myCoursesBtn;
     TextView welcomeTxt;
 
     @Override
@@ -29,6 +29,8 @@ public class StudentFunction extends AppCompatActivity {
 
         logoutBtn = findViewById(R.id.logOut);
         welcomeTxt = findViewById(R.id.welcomeUser);
+        searchCourseBtn = findViewById(R.id.SearchCourse);
+        myCoursesBtn = findViewById(R.id.myCourses);
         welcomeTxt.setText("Welcome " + MainActivity.currentUser.getUsername() + " !");
 
         // button listeners
@@ -38,6 +40,22 @@ public class StudentFunction extends AppCompatActivity {
                 startActivity(new Intent(StudentFunction.this, MainActivity.class));
             }
         });
+
+        searchCourseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StudentFunction.this, StudentSearchCourse.class));
+            }
+        });
+
+        myCoursesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(StudentFunction.this, StudentMyCourses.class));
+            }
+        });
+
+
     }
 }
 
