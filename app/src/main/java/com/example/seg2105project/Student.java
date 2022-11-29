@@ -10,7 +10,7 @@ public class Student implements User {
     private String password;
     public final String ROLE = "Student";
     private int id;
-    private String courses;
+    public String courses;
     DBHandler myDBHandler = MainActivity.myDBHandler;
 
     public Student(){}

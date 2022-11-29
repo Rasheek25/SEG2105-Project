@@ -84,7 +84,7 @@ public class StudentSearchCourse extends AppCompatActivity {
                 else if (courseCodeET.getText().toString().equals("")) {
                     course = myDBHandler.findByCourseName(courseNameET.getText().toString());
                     if (course != null) {
-                        FindViewByCourseName(course) ;                   }
+                        FindViewByCourseName(course);                   }
                     else {
                         clearList();
                         Toast.makeText(StudentSearchCourse.this, "No match found", Toast.LENGTH_SHORT).show();
@@ -165,7 +165,7 @@ public class StudentSearchCourse extends AppCompatActivity {
 
     }
 
-    private void FindViewByCourseName(Course course) {
+    public void FindViewByCourseName(Course course) {
         courseList.clear();
         Cursor cursor = myDBHandler.getCourses();
         if (cursor.getCount() == 0) {
@@ -181,13 +181,12 @@ public class StudentSearchCourse extends AppCompatActivity {
         }
 
 
-
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courseList);
         courseListView.setAdapter(adapter);
 
     }
 
-    private void FindViewByCourseCode(Course course) {
+    public void FindViewByCourseCode(Course course) {
         courseList.clear();
         Cursor cursor = myDBHandler.getCourses();
         if (cursor.getCount() == 0) {
@@ -210,7 +209,7 @@ public class StudentSearchCourse extends AppCompatActivity {
 
     }
 
-    private boolean FindViewByCourseDay(String day) {
+    public boolean FindViewByCourseDay(String day) {
         courseList.clear();
         boolean found = false;
         Cursor cursor = myDBHandler.getCourses();
