@@ -98,10 +98,18 @@ public class EditCourseDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
+                    if(Integer.parseInt(capacityET.getText().toString()) <= 0){
+                        Toast.makeText(getApplicationContext(),
+                                "Invalid input",
+                                Toast.LENGTH_LONG).show();
+
+                    }
+                    else{
                     selectedCourse.setStudentCapacity(Integer.parseInt(capacityET.getText().toString()));
                     Toast.makeText(getApplicationContext(),
                             "Capacity edited successfully",
                             Toast.LENGTH_LONG).show();
+                    }
                 }
                 catch (Exception e){
                     Toast.makeText(getApplicationContext(),
