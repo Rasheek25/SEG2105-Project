@@ -96,8 +96,16 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
         <activity
             android:name=".AdminFunction"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".InstructorViewStudents"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
