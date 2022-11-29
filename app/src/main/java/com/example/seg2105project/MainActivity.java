@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     if((myDBHandler.getUserRole(enteredUsername, enteredUsername)).equals("Student")) {
                         currentUser = new Student(enteredUsername, enteredpassword);
                         startActivity(new Intent(MainActivity.this, StudentFunction.class));
+
                     }
                     //if user is instructor
                     else if(myDBHandler.getUserRole(enteredUsername, enteredUsername).equals("Instructor")) {

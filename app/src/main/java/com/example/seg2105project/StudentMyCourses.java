@@ -75,7 +75,7 @@ public class StudentMyCourses extends AppCompatActivity {
     private void viewCourses() {
         courseList.clear();
         String courses = myDBHandler.getStudentCourses(MainActivity.currentUser);
-        if (courses.equals("N/A")) {
+        if (courses.equals("N/A") || courses.equals("")) {
             Toast.makeText(StudentMyCourses.this, "Nothing to show", Toast.LENGTH_SHORT).show();
         } else {
             String[] coursesArr = courses.split(";");

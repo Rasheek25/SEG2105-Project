@@ -19,7 +19,7 @@ import android.os.Bundle;
 
 public class CourseMenu extends AppCompatActivity {
 
-    Button backBtn, editCourseBtn, assignBtn;
+    Button backBtn, editCourseBtn, assignBtn, viewStudentsBtn;
     TextView courseCodeText, courseNameText, courseInstructorText, courseScheduleText, courseCapacityText, courseDescriptionText;
     Course selectedCourse;
 
@@ -29,10 +29,16 @@ public class CourseMenu extends AppCompatActivity {
         setContentView(R.layout.activity_course_menu);
         getSupportActionBar().hide();
 
-        selectedCourse = SearchCourse.selectedCourse;
+        if(MainActivity.currentUser instanceof Instructor){
+            selectedCourse = SearchCourse.selectedCourse;
+        }
+        else if(MainActivity.currentUser instanceof Student){
+            selectedCourse = StudentSearchCourse.studentSelectedCourse;
+        }
         backBtn = (Button) findViewById(R.id.back);
         assignBtn = (Button) findViewById(R.id.assign);
         editCourseBtn = (Button) findViewById(R.id.edit);
+        viewStudentsBtn = (Button) findViewById(R.id.viewStudents);
         courseCodeText = findViewById(R.id.CourseCode);
         courseNameText = findViewById(R.id.CourseName);
         courseInstructorText =  findViewById(R.id.instructor);
@@ -46,36 +52,63 @@ public class CourseMenu extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CourseMenu.this, SearchCourse.class));
+                //User is Instructor
+                if(MainActivity.currentUser instanceof Instructor){
+                    startActivity(new Intent(CourseMenu.this, SearchCourse.class));
+                }
+                //user is student
+                else if(MainActivity.currentUser instanceof Student){
+                    startActivity(new Intent(CourseMenu.this, StudentSearchCourse.class));
+                }
+
+            }
+        });
+
+        viewStudentsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CourseMenu.this, InstructorViewStudents.class));
             }
         });
 
         assignBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //User is Instructor
-                if(selectedCourse.getInstructor() == null) {
-                    selectedCourse.assign((Instructor) MainActivity.currentUser);
-                    Toast.makeText(getApplicationContext(),
-                            "Assigned to course successfully",
-                            Toast.LENGTH_LONG).show();
-                    update();
-                    UserRightsCheck();
+                if (MainActivity.currentUser instanceof Instructor){
+                    if (selectedCourse.getInstructor() == null) {
+                        selectedCourse.assign((Instructor) MainActivity.currentUser);
+                        Toast.makeText(getApplicationContext(),
+                                "Assigned to course successfully",
+                                Toast.LENGTH_LONG).show();
+                        update();
+                        UserRightsCheck();
+                    } else if (selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())) {
+                        selectedCourse.unassign();
+                        Toast.makeText(getApplicationContext(),
+                                "Un-assigned to course successfully",
+                                Toast.LENGTH_LONG).show();
+                        update();
+                        UserRightsCheck();
+
+                    }
                 }
+
                 //user is student
-                else if (MainActivity.currentUser instanceof Instructor){
-                    Student currentStudent = (Student)MainActivity.currentUser;
+                else if (MainActivity.currentUser instanceof Student){
+                    Student currentStudent = (Student) MainActivity.currentUser;
                     //student is enrolled
                     if( currentStudent.isEnrolled(selectedCourse)) {
                         currentStudent.drop(selectedCourse);
                         Toast.makeText(getApplicationContext(),
-                                "Droped course successfully",
+                                "Dropped course successfully",
                                 Toast.LENGTH_LONG).show();
                         update();
                         UserRightsCheck();
                     }
 
-                    //student is enrolled
+                    //student is not enrolled
                     else if ( !currentStudent.isEnrolled(selectedCourse)) {
                         currentStudent.enroll(selectedCourse);
                         Toast.makeText(getApplicationContext(),
@@ -84,16 +117,6 @@ public class CourseMenu extends AppCompatActivity {
                         update();
                         UserRightsCheck();
                     }
-
-
-                }
-                else if (selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())){
-                    selectedCourse.unassign();
-                    Toast.makeText(getApplicationContext(),
-                            "Un-assigned to course successfully",
-                            Toast.LENGTH_LONG).show();
-                    update();
-                    UserRightsCheck();
 
                 }
 
@@ -111,46 +134,56 @@ public class CourseMenu extends AppCompatActivity {
 
     }
 
-    private void UserRightsCheck(){
+    private void UserRightsCheck() {
+        //user is Instructor
+        if (MainActivity.currentUser instanceof Instructor){
+            //course has no instructor
+            if (selectedCourse.getInstructorName().equals("N/A")) {
+                assignBtn.setText("assign to Course");
+                assignBtn.setVisibility(View.VISIBLE);
+                editCourseBtn.setVisibility(View.GONE);
+                viewStudentsBtn.setVisibility(View.GONE);
+            }
 
-        //course has no instructor
-        if(selectedCourse.getInstructorName().equals("N/A")){
-            assignBtn.setText("assign to Course");
-            assignBtn.setVisibility(View.VISIBLE);
-            editCourseBtn.setVisibility(View.GONE);
-        }
+            //current instructor already assigned
+            else if (selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())) {
+                assignBtn.setText("un-assign to course");
+                editCourseBtn.setVisibility(View.VISIBLE);
+                assignBtn.setVisibility(View.VISIBLE);
+                viewStudentsBtn.setVisibility(View.VISIBLE);
 
-        //current instructor already assigned
-        else if(selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())){
-            assignBtn.setText("un-assign to course");
-            editCourseBtn.setVisibility(View.VISIBLE);
-            assignBtn.setVisibility(View.VISIBLE);
+            }
+            //course has other instructor
+            else if (!selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())) {
+                editCourseBtn.setVisibility(View.GONE);
+                assignBtn.setVisibility(View.GONE);
+                viewStudentsBtn.setVisibility(View.GONE);
 
+            }
         }
 
         //user is student
-        else if (MainActivity.currentUser instanceof Instructor){
-            Student currentStudent = (Student)MainActivity.currentUser;
+        else if (MainActivity.currentUser instanceof Student){
+            Student currentStudent = (Student) MainActivity.currentUser;
             //student is enrolled
             if( currentStudent.isEnrolled(selectedCourse)) {
                 editCourseBtn.setVisibility(View.GONE);
-                assignBtn.setText("enroll");
+                assignBtn.setVisibility(View.VISIBLE);
+                viewStudentsBtn.setVisibility(View.GONE);
+                assignBtn.setText("Drop Course");
             }
 
             //student is enrolled
             else if ( !currentStudent.isEnrolled(selectedCourse)) {
                 editCourseBtn.setVisibility(View.GONE);
-                assignBtn.setText("Drop Course");
+                assignBtn.setVisibility(View.VISIBLE);
+                viewStudentsBtn.setVisibility(View.GONE);
+                assignBtn.setText("Enroll to course");
             }
 
         }
 
-        //course has other instructor
-        else if (!selectedCourse.getInstructorName().equals(MainActivity.currentUser.getUsername())){
-            editCourseBtn.setVisibility(View.GONE);
-            assignBtn.setVisibility(View.GONE);
 
-        }
 
 
 
@@ -158,6 +191,13 @@ public class CourseMenu extends AppCompatActivity {
     }
 
     private void update(){
+        if(MainActivity.currentUser instanceof Instructor){
+            selectedCourse = SearchCourse.selectedCourse;
+        }
+        else if(MainActivity.currentUser instanceof Student){
+            selectedCourse = StudentSearchCourse.studentSelectedCourse;
+        }
+
        /* if(selectedCourse.getCourseDescription() == null) {
             courseDescriptionText.setText("N/A");
             selectedCourse.setCourseDescription("N/A");

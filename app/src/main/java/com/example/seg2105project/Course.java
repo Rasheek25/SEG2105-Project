@@ -2,6 +2,7 @@ package com.example.seg2105project;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Course {
@@ -147,15 +148,17 @@ public class Course {
     public void removeStudent(Student student) {
         this.enrolledStudents = myDBHandler.getEnrolledStudents(this);
         String[] studentsArray = this.enrolledStudents.split(";");
-        List<String> studentsArrayList = Arrays.asList(studentsArray);
-        for (String c: studentsArrayList){
+        List<String> temp = Arrays.asList(studentsArray);
+        LinkedList<String> studentsLinkedList = new LinkedList<String>(temp);
+        for (String c: studentsLinkedList){
             if( c.equals(student.toString())){
-                studentsArrayList.remove(c);
+                //studentsLinkedList.remove(studentsLinkedList.indexOf(c));
+                studentsLinkedList.remove(c);
             }
         }
         StringBuffer buffer = new StringBuffer();
-        studentsArrayList.remove("");
-        for (String c: studentsArrayList){
+        studentsLinkedList.remove("");
+        for (String c: studentsLinkedList){
             buffer.append(c);
             buffer.append(";");
         }

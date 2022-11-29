@@ -61,12 +61,26 @@ public class SearchCourse extends AppCompatActivity {
                 Course course = null;
                 if (courseCodeET.getText().toString().equals("") && courseNameET.getText().toString().equals("")) {
                     viewCourses();
-                } else if (courseNameET.getText().toString().equals("")) {
+                }
+                else if (courseNameET.getText().toString().equals("")) {
                     course = myDBHandler.findByCourseCode(courseCodeET.getText().toString());
-                    FindViewByCourseCode(course);
-                } else if (courseCodeET.getText().toString().equals("")) {
+                    if (course != null) {
+                        FindViewByCourseCode(course) ;                   }
+                    else {
+                        clearList();
+                        Toast.makeText(SearchCourse.this, "No match found", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                else if (courseCodeET.getText().toString().equals("")) {
                     course = myDBHandler.findByCourseName(courseNameET.getText().toString());
-                    FindViewByCourseName(course);
+                    if(course != null) {
+                        FindViewByCourseName(course);
+                    }
+                    else{
+                        clearList();
+                        Toast.makeText(SearchCourse.this, "No match found", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 else {
@@ -181,6 +195,12 @@ public class SearchCourse extends AppCompatActivity {
         courseListView.setAdapter(adapter);
 
 
+    }
+
+    public void clearList(){
+        courseList.clear();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courseList);
+        courseListView.setAdapter(adapter);
     }
 
 

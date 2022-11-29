@@ -369,7 +369,7 @@ public class DBHandler extends SQLiteOpenHelper {
             String idStr = cursor.getString(0);
             ContentValues contentValues = new ContentValues();
             contentValues.put(COLUMN_COURSES, courses);
-            db.update(TABLE_NAME, contentValues,COURSE_COLUMN_ID + "=" + idStr, null);
+            db.update(TABLE_NAME, contentValues,COLUMN_ID + "=" + idStr, null);
             cursor.close();
             result = true;
         }
