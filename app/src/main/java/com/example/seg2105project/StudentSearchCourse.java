@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -222,8 +223,9 @@ public class StudentSearchCourse extends AppCompatActivity {
                 List<String> courseDays = new ArrayList<>();
 
                 //filtering the course days from the schedule
-                String[] days = cursor.getString(6).split(" | ");
+                String[] days = cursor.getString(6).split(" / ");
                 for (String d : days ){
+                    Log.d("CREATION", d);
                     String[] temp = d.split(" : ");
                     courseDays.add(temp[0]);
                 }

@@ -8,11 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.junit.Test;
 
+import java.util.Optional;
+
 public class CourseTest {
     Course course = new Course("tc100", "testcourse");
     Instructor instructor = new Instructor("instructortest","test123");
     Student student = new Student("studenttest","test123");
-    DBHandler dbHandler = new DBHandler(MainActivity);
+
 
 
 
@@ -64,40 +66,7 @@ public class CourseTest {
 
 
 
-    @Test
-    public void enrollTest() {
-        dbHandler.addUser(student);
-        student.enroll(course);
-        assertTrue(student.isEnrolled(course));
-    }
 
 
-    @Test
-    public void dropTest(){
-        student.drop(course);
-        assertFalse(student.isEnrolled(course));
-    }
 
-    @Test
-    public void findByCourseCodeTest(){
-        dbHandler.addCourse(course);
-        Course test = dbHandler.findByCourseCode(course.getCourseCode());
-        assertEquals(course.getCourseCode(), test.getCourseCode());
-        assertEquals(course.getCourseName(), test.getCourseName());
-    }
-
-    @Test
-    public void findByCourseNameTest(){
-        Course test = dbHandler.findByCourseCode(course.getCourseName());
-        assertEquals(course.getCourseName(), test.getCourseName());
-        assertEquals(course.getCourseCode(), test.getCourseCode());
-
-    }
-
-    @Test
-    public void findByCourseDay(){
-        course.setCourseSchedule("Tuesday : 10:00 AM - 11:30 AM | ");
-        String schedule = dbHandler.getCourseSchedule(course);
-        assertEquals(course.getCourseSchedule(), schedule);
-    }
 }

@@ -1,10 +1,16 @@
 package com.example.seg2105project;
 
+import static android.app.PendingIntent.getActivity;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -110,12 +116,39 @@ public class CourseMenu extends AppCompatActivity {
 
                     //student is not enrolled
                     else if ( !currentStudent.isEnrolled(selectedCourse)) {
-                        currentStudent.enroll(selectedCourse);
-                        Toast.makeText(getApplicationContext(),
-                                "Enrolled to course successfully",
-                                Toast.LENGTH_LONG).show();
-                        update();
-                        UserRightsCheck();
+                        if(currentStudent.checkStudentCoursesConflict(selectedCourse)) {
+                            currentStudent.enroll(selectedCourse);
+                            Toast.makeText(getApplicationContext(),
+                                    "Enrolled to course successfully",
+                                    Toast.LENGTH_LONG).show();
+                            update();
+                            UserRightsCheck();
+                        }
+                        else{
+                            /*Toast.makeText(getApplicationContext(),
+                                    "Cannot Enroll: "+Student.courseConflictErrorMsg,
+                                    Toast.LENGTH_LONG).show();
+
+                             */
+                            // Create the object of AlertDialog Builder class
+                            AlertDialog.Builder builder = new AlertDialog.Builder(CourseMenu.this);
+
+                            // Set the message show for the Alert time
+                            builder.setMessage(Student.courseConflictErrorMsg);
+
+                            // Set Alert Title
+                            builder.setTitle("Cannot Enroll !");
+
+                            // Create the Alert dialog
+                            AlertDialog alertDialog = builder.create();
+                            // Show the Alert Dialog box
+                            alertDialog.show();
+
+
+
+                            update();
+                            UserRightsCheck();
+                        }
                     }
 
                 }
@@ -133,6 +166,8 @@ public class CourseMenu extends AppCompatActivity {
 
 
     }
+
+
 
     private void UserRightsCheck() {
         //user is Instructor
@@ -233,6 +268,8 @@ public class CourseMenu extends AppCompatActivity {
         }
 
     }
+
+
 
 
 }

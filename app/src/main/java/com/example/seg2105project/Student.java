@@ -1,5 +1,7 @@
 package com.example.seg2105project;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -12,6 +14,8 @@ public class Student implements User {
     private int id;
     public String courses;
     DBHandler myDBHandler = MainActivity.myDBHandler;
+
+    public static String courseConflictErrorMsg;
 
     public Student(){}
 
@@ -125,6 +129,40 @@ public class Student implements User {
 
         }
         return false;
+    }
+
+    //returns true if check is passed
+    public boolean checkStudentCoursesConflict(Course newCourse){
+        //resetting error msg
+        courseConflictErrorMsg = null;
+        String coursesStr = myDBHandler.getStudentCourses(this);
+
+        //student have not enrolled to any courses yet, or not enrolled to any course
+        if(coursesStr.equals("N/A") || coursesStr.equals("")){
+            return true;
+        }
+
+        //constructing course list
+        String[] coursesArr = coursesStr.split(";");
+        List<String> coursesStrList = Arrays.asList(coursesArr);
+        List<Course> coursesList = new ArrayList<>();
+        coursesStrList.remove("");
+        for(String d: coursesStrList){
+            coursesList.add(new Course(d));
+
+        }
+        Log.d("CREATION",coursesList.toString());
+
+        //checking course to course conflict
+        for(Course c : coursesList){
+            if(c.courseConflict(newCourse)){
+                courseConflictErrorMsg = "Schedule conflict with " + c.toString();
+                return false;
+            }
+        }
+
+        //all conditions checked
+        return true;
     }
 
 }

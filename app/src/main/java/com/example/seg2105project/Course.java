@@ -1,5 +1,7 @@
 package com.example.seg2105project;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -21,6 +23,19 @@ public class Course {
     public Course(String courseCode, String courseName){
         this.courseCode = courseCode;
         this.courseName = courseName;
+        this.courseDescription = "N/A";
+        this.instructor = null;
+        this.studentCapacity = 0;
+        this.studentCount = 0;
+        this.courseSchedule = "N/A";
+        this.enrolledStudents = "N/A"; {
+        };
+    }
+
+    public Course(String course){
+        String[] courseInfo = course.split(" : ");
+        this.courseCode = courseInfo[0];
+        this.courseName = courseInfo[1];
         this.courseDescription = "N/A";
         this.instructor = null;
         this.studentCapacity = 0;
@@ -166,4 +181,55 @@ public class Course {
         myDBHandler.editEnrolledStudents(this, buffer.toString());
 
     }
+
+    // checks course conflict between 2 courses
+    public boolean courseConflict(Course course){
+        //list of course days
+        Course course1 = course;
+        Course course2  = this;
+        List<Session> course1Sessions = new ArrayList<>();
+        List<Session> course2Sessions = new ArrayList<>();
+
+
+        //adding course session to a list
+        String str1 = course1.getCourseSchedule();
+        String[] sessionStrings1 = str1.split(" / ");
+        List<String> temp1 = Arrays.asList(sessionStrings1);
+        temp1.remove("");
+        Log.d("CREATION", course1.getCourseSchedule());
+        Log.d("CREATION", temp1.toString());
+        for (String d : temp1 ){
+            course1Sessions.add(new Session(d));
+        }
+
+        String str2 = course2.getCourseSchedule();
+        String[] sessionStrings2 = str2.split(" / ");
+        List<String> temp2 = Arrays.asList(sessionStrings2);
+        
+        temp2.remove("");
+        for (String d : temp2 ){
+            course2Sessions.add(new Session(d));
+        }
+
+        //checking conflicts
+        boolean conflictFound = false;
+
+        while(!conflictFound){
+            for (Session s1: course1Sessions){
+                for(Session s2: course2Sessions){
+                    if(s1.checkSessionConflict(s2)){
+                        conflictFound = true;
+                    }
+                    else{
+                        continue;
+                    }
+                }
+            }
+            break;
+        }
+        return conflictFound;
+
+    }
+
+
 }

@@ -141,7 +141,7 @@ public class EditCourseDetails extends AppCompatActivity {
         return buffer.toString();
     }*/
 
-    //date and hours --> "day : startTime - endTime | " format
+    //date and hours --> "day : startTime - endTime / " format
     private String dateToString(EditText day, EditText startTime, EditText endTime){
         String previous = selectedCourse.getCourseSchedule();
         if (previous.equals("N/A")){
@@ -153,7 +153,7 @@ public class EditCourseDetails extends AppCompatActivity {
         buffer.append(startTime.getText().toString());
         buffer.append(" - ");
         buffer.append(endTime.getText().toString());
-        buffer.append(" | ");
+        buffer.append(" / ");
         return buffer.toString();
     }
 
